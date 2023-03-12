@@ -17,6 +17,12 @@
             width: 1346px;
             height: 590px;
         }
+
+        image{
+            z-index: 1px;
+        }
+
+        
     </style>
 </head>
 
@@ -61,6 +67,7 @@
         
         }
 
+        
 
         var bg=new Image();
         bg.src="image/bgspace.jpg";
@@ -80,8 +87,12 @@
         var pesawat=new Image();
         pesawat.src="image/kapal.png";
 
+        var suara=new Audio();
+        suara.src="audio/backsound.mp3";
+
         function aksikanvas(){
 
+            suara.play()
             document.addEventListener('keydown', function(event){
                 if(event.keyCode==37){
                     pesawat1.x-=6;
@@ -106,6 +117,20 @@
             var cW=canvas.width;
             var cH=canvas.height;
 
+
+            ctx.canvas.addEventListener('click', function(event){
+                var mouseX=event.clientX - ctx.canvas.offsetLeft;
+                var mouseY=event.clientY - ctx.canvas.offsetTop;
+
+                if(mouseX>430 && mouseX<630 && mouseY <480 && mouseY>360 ){
+                    window.location.reload();
+                }
+
+                if(mouseX>740 && mouseX<900 && mouseY <480 && mouseY>360 ){
+                    self.close()
+                }
+            });
+
             var peluru =[];
 
             function renderPeluru(){
@@ -120,12 +145,12 @@
             }
 
             var meteor = [
-                {"x":1246,"y":30,"w":70,"h":70},
-                {"x":1290,"y":100,"w":70,"h":70},
+                {"x":1246,"y":120,"w":70,"h":70},
+                {"x":1490,"y":120,"w":70,"h":70},
                 {"x":1225,"y":260,"w":70,"h":70},
-                {"x":1286,"y":260,"w":70,"h":70},
-                {"x":1270,"y":380,"w":70,"h":70},
-                {"x":1366,"y":380,"w":70,"h":70},
+                {"x":1426,"y":260,"w":70,"h":70},
+                {"x":1570,"y":380,"w":70,"h":70},
+                {"x":1766,"y":380,"w":70,"h":70},
             ];
 
             function renderMeteor(){
@@ -136,6 +161,12 @@
                     if((m.x<0)||(m.x+40<pesawat1.x+pesawat1.w && m.y+m.h>pesawat1.y && m.y <pesawat1.y+pesawat1.h)){
                         clearInterval(interval);
                         ctx.drawImage(lose,0,0);
+
+                       
+                        
+                        suara.pause();
+
+                        this.style.zIndex = 100;
                     }
                 }
             }
@@ -160,6 +191,7 @@
                     clearInterval(interval);
                     ctx.clearRect(0,0,cW,cH);
                     ctx.drawImage(win,0,0);
+                    suara.pause();
                 }
             }
 
