@@ -90,6 +90,12 @@
         var suara=new Audio();
         suara.src="audio/backsound.mp3";
 
+        var menang=new Audio();
+        menang.src="audio/menang.mp3";
+
+        var kalah=new Audio();
+        kalah.src="audio/kalah.mp3";
+
         function aksikanvas(){
 
             suara.play()
@@ -127,7 +133,8 @@
                 }
 
                 if(mouseX>740 && mouseX<900 && mouseY <480 && mouseY>360 ){
-                    self.close()
+                    history.go(-1)
+                    // self.close()
                 }
             });
 
@@ -161,6 +168,7 @@
                     if((m.x<0)||(m.x+40<pesawat1.x+pesawat1.w && m.y+m.h>pesawat1.y && m.y <pesawat1.y+pesawat1.h)){
                         clearInterval(interval);
                         ctx.drawImage(lose,0,0);
+                        kalah.play();
 
                        
                         
@@ -191,6 +199,7 @@
                     clearInterval(interval);
                     ctx.clearRect(0,0,cW,cH);
                     ctx.drawImage(win,0,0);
+                    menang.play();
                     suara.pause();
                 }
             }
