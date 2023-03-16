@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>space adventure</title>
+
+    <style>
+        body {
+            background-color: rgb(3, 2, 12);
+        }
+
+        #canvas {
+            border: 1px solid;
+            width: 1346px;
+            height: 590px;
+        }
+
+        image{
+            z-index: 1px;
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    <p style="color: aliceblue;position: absolute; margin-left: 100px; margin-top: 20px;">Username : player</p>
+
+    <p style="color: aliceblue;position: absolute; margin-left: 1100px; margin-top: 20px;">Time : <span id="seconds">00</span>.<span id="tens">00</span></p>
+   
+    
+    <canvas id="canvas"> </canvas>
+
+    <script>
+
+        var seconds = 00; 
+        var tens = 00; 
+        var appendTens = document.getElementById("tens")
+        var appendSeconds = document.getElementById("seconds")
+       
+
+        function startTimer () {
+            tens++; 
+        
+            if(tens <= 9){
+            appendTens.innerHTML = "0" + tens;
+            }
+            
+            if (tens > 9){
+            appendTens.innerHTML = tens;
+            } 
+        
+            if (tens > 99) {
+            console.log("seconds");
+            seconds++;
+            appendSeconds.innerHTML = "0" + seconds;
+            tens = 0;
+            appendTens.innerHTML = "0" + 0;
+            }
+        
+            if (seconds > 9){
+            appendSeconds.innerHTML = seconds;
+            }
+        
+        }
+
+        
+
+        var bg=new Image();
+        bg.src="../image/bgspace.jpg";
+
+        var lose=new Image();
+        lose.src="../image/lose.png";
+
+        var win=new Image();
+        win.src="../image/winner.png";
+
+        var batu=new Image();
+        batu.src="../image/mteor.png";
+
+        var misil=new Image();
+        misil.src="../image/misile.png";
+
+        var pesawat=new Image();
+        pesawat.src="../image/kapalbiru.png";
+
+        var suara=new Audio();
+        suara.src="../audio/backsound.mp3";
+
+        var menang=new Audio();
+        menang.src="../audio/menang.mp3";
+
+        var kalah=new Audio();
+        kalah.src="../audio/kalah.mp3";
+
+        var tembak=new Audio();
+        tembak.src="../audio/tembak.mp3";
+
+        var mledak=new Audio();
+        mledak.src="../audio/mledak.mp3";
+
+
+        function aksikanvas(){
+
+            suara.play()
+            document.addEventListener('keydown', function(event){
+                if(event.keyCode==37){
+                    pesawat1.x-=12;
+                }else if(event.keyCode==38){
+                    pesawat1.y-=12;
+                }else if(event.keyCode==39){
+                    pesawat1.x+=12;
+                }else if(event.keyCode==40){
+                    pesawat1.y+=12;
+                }
+                else if(event.keyCode==88){
+                    tembak.play()
+                    peluru.push({"x":pesawat1.x+70,"y":pesawat1.y,"w":16,"h":5});
+                   
+                }
+            })
+
+            var canvas= document.getElementById('canvas');
+            var ctx=canvas.getContext('2d');
+
+            canvas.width=canvas.scrollWidth;
+            canvas.height=canvas.scrollHeight;
+
+            var cW=canvas.width;
+            var cH=canvas.height;
+
+
+            ctx.canvas.addEventListener('click', function(event){
+                var mouseX=event.clientX - ctx.canvas.offsetLeft;
+                var mouseY=event.clientY - ctx.canvas.offsetTop;
+
+                if(mouseX>430 && mouseX<630 && mouseY <480 && mouseY>360 ){
+                    window.location.reload();
+                }
+
+                if(mouseX>740 && mouseX<900 && mouseY <480 && mouseY>360 ){
+                    history.go(-1)
+                    // self.close()
+                }
+            });
+
+            var peluru =[];
+
+            function renderPeluru(){
+                for(var i =0;i<peluru.length;i++){
+                    var p=peluru[i];
+                    ctx.drawImage(misil,p.x+=18,p.y);
+
+                    if(p.x>cW){
+                        peluru.splice(i,1);
+                    }
+                }
+            }
+
+            var meteor = [
+                {"x":1246,"y":120,"w":70,"h":70},
+                {"x":1490,"y":120,"w":70,"h":70},
+                {"x":1225,"y":260,"w":70,"h":70},
+                {"x":1426,"y":260,"w":70,"h":70},
+                {"x":1570,"y":380,"w":70,"h":70},
+                {"x":1766,"y":380,"w":70,"h":70},
+            ];
+
+            function renderMeteor(){
+                for(var i =0;i<meteor.length;i++){
+                    var m = meteor[i];
+                    ctx.drawImage(batu,m.x-=3,m.y);
+
+                    if((m.x<0)||(m.x+40<pesawat1.x+pesawat1.w && m.y+m.h>pesawat1.y && m.y <pesawat1.y+pesawat1.h)){
+                        clearInterval(interval);
+                        ctx.drawImage(lose,0,0);
+                        kalah.play();
+
+                       
+                        
+                        suara.pause();
+
+                        this.style.zIndex = 100;
+                    }
+                }
+            }
+
+            function kena(){
+                for(var i =0;i<meteor.length;i++){
+                    var m = meteor[i];
+                    for(var j=0;j<peluru.length;j++){
+                        var p=peluru[j];
+
+                        if(p.x>m.x && p.y+p.h>m.y && p.y<m.y+m.h){
+                            mledak.play();
+                            meteor.splice(i,1);
+                            peluru.splice(j,1)
+                        }
+
+
+
+                    }
+                }
+
+                if(meteor.length==0){
+                    clearInterval(interval);
+                    ctx.clearRect(0,0,cW,cH);
+                    ctx.drawImage(win,0,0);
+                    mledak.pause();
+                    tembak.pause();
+                    menang.play();
+                    suara.pause();
+                }
+            }
+
+            function Bg(){
+                this.x=0,this.y=0;
+                this.render=function(){
+                    ctx.drawImage(bg,this.x-=0.6,this.y);
+                    if(this.x==-2691){
+                        this.x=0;
+                    }
+                }
+            }
+
+            var back=new Bg();
+
+            function Pesawat(){
+                this.x=100, this.y=200, this.w=120,this.h=60;
+                this.render=function(){
+                    ctx.drawImage(pesawat,this.x,this.y);
+                }
+            }
+
+            var pesawat1=new Pesawat();
+
+            function animasi(){
+                ctx.save();
+                ctx.clearRect(0,0,cW,cH);
+
+                back.render();
+                pesawat1.render();
+                renderMeteor();
+                renderPeluru();
+                kena();
+
+                startTimer();
+
+                ctx.restore();
+            }
+            var interval = setInterval(animasi,30);
+        }
+
+        window.onload=aksikanvas;
+
+    </script>
+</body>
+
+</html>

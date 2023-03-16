@@ -39,8 +39,18 @@
             width: 500px;
             margin-left: 420px;
         }
-        .modal-content{
-            background-color:  rgba(16, 4, 54, 0.993);
+
+        .modal-content {
+            background-color: rgba(16, 4, 54, 0.301);
+        }
+        .butonlevel{
+            background-color: #cc952e;
+            border-radius: 5px;
+            outline: none;
+        }
+        .butonlevel a{
+            color: white;
+            text-decoration: none;
         }
     </style>
     <link rel="canonical" href="https://pixworld.io/example">
@@ -151,7 +161,7 @@
         }
 
         /*Modal*/
-     
+
 
         .close {
             color: #aaa;
@@ -829,12 +839,15 @@
         <img src="image/Backward_BTN.png" alt="" class="back"
             style="margin-right: 1100px;margin-left: 20px;margin-top: 10px;">
 
-        <img src="image/Close_BTN.png" alt="" class="close" style="margin-top: 10px;">
+     
     </div>
 
 
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary judul1" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-top: -390px;position: absolute;margin-left: 257px;">
+
+
+    <!-- Button -->
+    <button type="button" class="btn btn-primary judul1" data-bs-toggle="modal" data-bs-target="#exampleModal"
+        style="margin-top: -390px;position: absolute;margin-left: 257px;">
         1
     </button>
     <!-- Modal -->
@@ -843,122 +856,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: white;">Pick plane</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="">
-
-                    
-                    <script>
-                        (function (d, s, id) {
-                            var js, fjs = d.getElementsByTagName(s)[0];
-                            if (d.getElementById(id)) return;
-                            js = d.createElement(s);
-                            js.id = id;
-                            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-                            fjs.parentNode.insertBefore(js, fjs);
-                        }(document, 'script', 'facebook-jssdk'));
-                    </script>
-
-                    <script language="javascript">
-                        var av_a = [];
-                        av_a[0] = 60;
-                        av_a[1] = 104;
-                        av_a[2] = 5416;
-                        av_a[3] = 6127;
-                        av_a[4] = 6934;
-                        var av_depago = "";
-
-                        function getCookie(cname) {
-                            var name = cname + "=";
-                            var ca = document.cookie.split(';');
-                            for (var i = 0; i < ca.length; i++) {
-                                var c = ca[i];
-                                while (c.charAt(0) == ' ') c = c.substring(1);
-                                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
-                            }
-                            return "";
-                        }
-
-                        function setCookie(cname, cvalue, exdays) {
-                            var expires = "expires=";
-                            if (exdays > 0) {
-                                var d = new Date();
-                                d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-                                expires = "expires=" + d.toUTCString();
-                            }
-                            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/; samesite=None; Secure";
-                        }
-
-
-                        $(document).ready(function () {
-
-                        });
-
-
-                        function falert(cad) {
-                            document.getElementById("modaltxt").innerHTML = cad;
-                            document.getElementById('divmodal').style.display = "block";
-                        }
-
-                        function onSubmit(token) {
-                            $("#diverr").hide();
-
-                            $("#idplayer").val("");
-                            $("#ids").val("");
-
-                            if ($("#nick").val().trim() == "") {
-                                $("#diverr").html("Please enter a Nick");
-                                $("#diverr").show();
-                                return false;
-                            };
-
-                            if (av_depago.indexOf("," + swiper.activeIndex + ",") != -1) {
-                                falert("Play and earn coins to choose this avatar");
-                                return false;
-                            }
-
-                            $("#loader").css('visibility', 'visible');
-
-                            $("#idav").val(av_a[swiper.activeIndex]);
-
-                            setCookie("av_player", $("#idav").val(), 365 * 10);
-
-                            $.ajax({
-                                type: "POST",
-                                url: "https://pixworld.io/js/dom_access.php?tk=" + token,
-                                data: $("#fapp").serialize(),
-                                success: function (result) {
-                                    //alert(result);
-                                    var pos = result.indexOf("-OK- -IDS:");
-                                    if (pos !== -1) {
-                                        pos += 10;
-                                        var pos2 = result.indexOf("-", pos);
-                                        var ids = result.substring(pos, pos2);
-                                        var pos = result.indexOf("-IDP:");
-                                        if (pos !== -1) {
-                                            pos += 5;
-                                            var pos2 = result.indexOf("-", pos);
-                                            var idp = result.substring(pos, pos2);
-
-                                            $("#idplayer").val(idp);
-                                            $("#ids").val(ids);
-                                            $("#fapp").submit();
-                                        }
-                                    } else if (result.indexOf("-KO- -NICKREPE-") != -1) {
-                                        $("#diverr").html("This Nick is not available");
-                                        $("#diverr").show();
-                                    } else if (result.indexOf("-KO-") != -1) {
-                                        $("#diverr").html("Sorry, at this moment access is not possible");
-                                        $("#diverr").show();
-                                    };
-                                    $("#loader").css('visibility', 'hidden');
-                                }
-                            });
-
-                            return false;
-                        }
-                    </script>
-
                     <div id="divmodal" class="modal" style="display:none;" onclick="this.style.display='none';">
                         <div id="divmodalcontent" class="modal-content">
                             <span class="close">×</span>
@@ -991,7 +891,7 @@
                                                 <tr class="tr_av">
                                                     <td colspan="2" style="height:10px"></td>
                                                 </tr>
-                                               
+
                                                 <tr class="tr_av">
                                                     <td colspan="2" align="center">
                                                         <!-- Swiper -->
@@ -1008,12 +908,11 @@
                                                                         <tbody>
                                                                             <tr>
                                                                                 <td style="height:52px;padding:0"><img
-                                                                                        src="Img/pesawat2.png"
-                                                                                        class="av"
+                                                                                        src="image/kapal.png" class="av"
                                                                                         style="margin:0;padding:0;">
                                                                                 </td>
-                                                                               
-                                                                                
+
+
                                                                             </tr>
                                                                             <tr>
                                                                                 <td align="center"
@@ -1026,7 +925,7 @@
                                                                                     <div align="left"
                                                                                         style="width:50px;height:5px;background-color:#CCCCCC;">
                                                                                         <div
-                                                                                            style="width:33px;height:5px;background-color:green;">
+                                                                                            style="width:25px;height:5px;background-color:rgb(33, 4, 41);">
                                                                                         </div>
                                                                                     </div>
                                                                                 </td>
@@ -1041,7 +940,7 @@
                                                                                     <div align="left"
                                                                                         style="width:50px;height:5px;background-color:#CCCCCC;">
                                                                                         <div
-                                                                                            style="width:5px;height:5px;background-color:green;">
+                                                                                            style="width:5px;height:5px;background-color:rgb(33, 4, 41);">
                                                                                         </div>
                                                                                     </div>
                                                                                 </td>
@@ -1052,15 +951,17 @@
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
-                                                                                <td align="center" style="margin-top: 25px;">
-                                                                                    <button style="margin-top: 25px;"><a href="index.html">choose</a></button>   
+                                                                                <td align="center"
+                                                                                    style="margin-top: 25px;">
+                                                                                    <button class="butonlevel" style="margin-top: 25px;"><a
+                                                                                            href="level1.html">choose</a></button>
                                                                                 </td>
                                                                             </tr>
-                                                                           
+
                                                                         </tbody>
                                                                     </table>
                                                                 </div>
-                                                                
+
                                                                 <div class="swiper-slide" role="group"
                                                                     aria-label="4 / 5"
                                                                     style="width: 15px; margin-right: 80px;">
@@ -1069,58 +970,56 @@
                                                                         <tbody>
                                                                             <tr>
                                                                                 <td style="height:52px;padding:0"><img
-                                                                                        src="Img/pesawat5.png"
+                                                                                        src="image/kapaloren.png"
                                                                                         class="av"
                                                                                         style="margin:0;padding:0;">
                                                                                 </td>
                                                                             </tr>
-                                                                            <tr>
-                                                                                <td align="center"
-                                                                                    style="padding:2px 0 0 0;">Speed
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td align="center"
-                                                                                    style="white-space:nowrap;padding:0;line-height:5px;">
-                                                                                    <div align="left"
-                                                                                        style="width:50px;height:5px;background-color:#CCCCCC;">
-                                                                                        <div
-                                                                                            style="width:23px;height:5px;background-color:green;">
-                                                                                        </div>
+                                                                           
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="center"
+                                                                                style="padding:2px 0 0 0;">Speed
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="center"
+                                                                                style="white-space:nowrap;padding:0;line-height:5px;">
+                                                                                <div align="left"
+                                                                                    style="width:50px;height:5px;background-color:#CCCCCC;">
+                                                                                    <div
+                                                                                        style="width:33px;height:5px;background-color:rgb(150, 60, 8);">
                                                                                     </div>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td align="center"
-                                                                                    style="padding:2px 0 0 0;">Shot</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td align="center"
-                                                                                    style="white-space:nowrap;padding:0;line-height:5px;">
-                                                                                    <div align="left"
-                                                                                        style="width:50px;height:5px;background-color:#CCCCCC;">
-                                                                                        <div
-                                                                                            style="width:5px;height:5px;background-color:green;">
-                                                                                        </div>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="center"
+                                                                                style="padding:2px 0 0 0;">Shot</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="center"
+                                                                                style="white-space:nowrap;padding:0;line-height:5px;">
+                                                                                <div align="left"
+                                                                                    style="width:50px;height:5px;background-color:#CCCCCC;">
+                                                                                    <div
+                                                                                        style="width:5px;height:5px;background-color:rgb(150, 60, 8);">
                                                                                     </div>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td align="center"
-                                                                                    style="padding:2px 0 0 0;">Shield
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td align="center"
-                                                                                    style="white-space:nowrap;padding:0;line-height:5px;">
-                                                                                    <div align="left"
-                                                                                        style="width:50px;height:5px;background-color:#CCCCCC;">
-                                                                                        <div
-                                                                                            style="width:30px;height:5px;background-color:green;">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </td>
-                                                                            </tr>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="center"
+                                                                                style="padding:2px 0 0 0;">
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="center"
+                                                                                style="margin-top: 25px;">
+                                                                                <button class="butonlevel" style="margin-top: 25px;"><a
+                                                                                        href="level/l1oren.html">choose</a></button>
+                                                                            </td>
+                                                                        </tr>
                                                                         </tbody>
                                                                     </table>
                                                                 </div>
@@ -1132,58 +1031,56 @@
                                                                         <tbody>
                                                                             <tr>
                                                                                 <td style="height:52px;padding:0"><img
-                                                                                        src="Img/pesawat6.png"
+                                                                                        src="image/kapalbiru.png"
                                                                                         class="av"
                                                                                         style="margin:0;padding:0;">
                                                                                 </td>
                                                                             </tr>
-                                                                            <tr>
-                                                                                <td align="center"
-                                                                                    style="padding:2px 0 0 0;">Speed
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td align="center"
-                                                                                    style="white-space:nowrap;padding:0;line-height:5px;">
-                                                                                    <div align="left"
-                                                                                        style="width:50px;height:5px;background-color:#CCCCCC;">
-                                                                                        <div
-                                                                                            style="width:20px;height:5px;background-color:green;">
-                                                                                        </div>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="center"
+                                                                                style="padding:2px 0 0 0;">Speed
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="center"
+                                                                                style="white-space:nowrap;padding:0;line-height:5px;">
+                                                                                <div align="left"
+                                                                                    style="width:50px;height:5px;background-color:#CCCCCC;">
+                                                                                    <div
+                                                                                        style="width:33px;height:5px;background-color:rgb(14, 29, 112);">
                                                                                     </div>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td align="center"
-                                                                                    style="padding:2px 0 0 0;">Shot</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td align="center"
-                                                                                    style="white-space:nowrap;padding:0;line-height:5px;">
-                                                                                    <div align="left"
-                                                                                        style="width:50px;height:5px;background-color:#CCCCCC;">
-                                                                                        <div
-                                                                                            style="width:10px;height:5px;background-color:green;">
-                                                                                        </div>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="center"
+                                                                                style="padding:2px 0 0 0;">Shot</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="center"
+                                                                                style="white-space:nowrap;padding:0;line-height:5px;">
+                                                                                <div align="left"
+                                                                                    style="width:50px;height:5px;background-color:#CCCCCC;">
+                                                                                    <div
+                                                                                        style="width:5px;height:5px;background-color:rgb(14, 29, 112);">
                                                                                     </div>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td align="center"
-                                                                                    style="padding:2px 0 0 0;">Shield
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td align="center"
-                                                                                    style="white-space:nowrap;padding:0;line-height:5px;">
-                                                                                    <div align="left"
-                                                                                        style="width:50px;height:5px;background-color:#CCCCCC;">
-                                                                                        <div
-                                                                                            style="width:20px;height:5px;background-color:green;">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </td>
-                                                                            </tr>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="center"
+                                                                                style="padding:2px 0 0 0;">
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="center"
+                                                                                style="margin-top: 25px;">
+                                                                                <button class="butonlevel"  style="margin-top: 25px;"><a
+                                                                                        href="level/l1biru.html">choose</a></button>
+                                                                            </td>
+                                                                        </tr>
                                                                         </tbody>
                                                                     </table>
                                                                 </div>
@@ -1270,10 +1167,9 @@
         </div>
     </div>
 
-
-
     <!-- buton1 -->
-    <button type="button" class="btn btn-primary judul1" data-bs-toggle="modal" data-bs-target="#exampleModal1" style="margin-top: -390px;position: absolute;margin-left: 653px;">
+    <button type="button" class="btn btn-primary judul1" data-bs-toggle="modal" data-bs-target="#exampleModal1"
+        style="margin-top: -390px;position: absolute;margin-left: 653px;">
         2
     </button>
     <!-- Modal1 -->
@@ -1282,121 +1178,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: white;">Pick plane</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="">
-
-                    
-                    <script>
-                        (function (d, s, id) {
-                            var js, fjs = d.getElementsByTagName(s)[0];
-                            if (d.getElementById(id)) return;
-                            js = d.createElement(s);
-                            js.id = id;
-                            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-                            fjs.parentNode.insertBefore(js, fjs);
-                        }(document, 'script', 'facebook-jssdk'));
-                    </script>
-
-                    <script language="javascript">
-                        var av_a = [];
-                        av_a[0] = 60;
-                        av_a[1] = 104;
-                        av_a[2] = 5416;
-                        av_a[3] = 6127;
-                        av_a[4] = 6934;
-                        var av_depago = "";
-
-                        function getCookie(cname) {
-                            var name = cname + "=";
-                            var ca = document.cookie.split(';');
-                            for (var i = 0; i < ca.length; i++) {
-                                var c = ca[i];
-                                while (c.charAt(0) == ' ') c = c.substring(1);
-                                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
-                            }
-                            return "";
-                        }
-
-                        function setCookie(cname, cvalue, exdays) {
-                            var expires = "expires=";
-                            if (exdays > 0) {
-                                var d = new Date();
-                                d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-                                expires = "expires=" + d.toUTCString();
-                            }
-                            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/; samesite=None; Secure";
-                        }
-
-
-                        $(document).ready(function () {
-
-                        });
-
-
-                        function falert(cad) {
-                            document.getElementById("modaltxt").innerHTML = cad;
-                            document.getElementById('divmodal').style.display = "block";
-                        }
-
-                        function onSubmit(token) {
-                            $("#diverr").hide();
-
-                            $("#idplayer").val("");
-                            $("#ids").val("");
-
-                            if ($("#nick").val().trim() == "") {
-                                $("#diverr").html("Please enter a Nick");
-                                $("#diverr").show();
-                                return false;
-                            };
-
-                            if (av_depago.indexOf("," + swiper.activeIndex + ",") != -1) {
-                                falert("Play and earn coins to choose this avatar");
-                                return false;
-                            }
-
-                            $("#loader").css('visibility', 'visible');
-
-                            $("#idav").val(av_a[swiper.activeIndex]);
-
-                            setCookie("av_player", $("#idav").val(), 365 * 10);
-
-                            $.ajax({
-                                type: "POST",
-                                url: "https://pixworld.io/js/dom_access.php?tk=" + token,
-                                data: $("#fapp").serialize(),
-                                success: function (result) {
-                                    //alert(result);
-                                    var pos = result.indexOf("-OK- -IDS:");
-                                    if (pos !== -1) {
-                                        pos += 10;
-                                        var pos2 = result.indexOf("-", pos);
-                                        var ids = result.substring(pos, pos2);
-                                        var pos = result.indexOf("-IDP:");
-                                        if (pos !== -1) {
-                                            pos += 5;
-                                            var pos2 = result.indexOf("-", pos);
-                                            var idp = result.substring(pos, pos2);
-
-                                            $("#idplayer").val(idp);
-                                            $("#ids").val(ids);
-                                            $("#fapp").submit();
-                                        }
-                                    } else if (result.indexOf("-KO- -NICKREPE-") != -1) {
-                                        $("#diverr").html("This Nick is not available");
-                                        $("#diverr").show();
-                                    } else if (result.indexOf("-KO-") != -1) {
-                                        $("#diverr").html("Sorry, at this moment access is not possible");
-                                        $("#diverr").show();
-                                    };
-                                    $("#loader").css('visibility', 'hidden');
-                                }
-                            });
-
-                            return false;
-                        }
-                    </script>
 
                     <div id="divmodal" class="modal" style="display:none;" onclick="this.style.display='none';">
                         <div id="divmodalcontent" class="modal-content">
@@ -1430,7 +1214,7 @@
                                                 <tr class="tr_av">
                                                     <td colspan="2" style="height:10px"></td>
                                                 </tr>
-                                               
+
                                                 <tr class="tr_av">
                                                     <td colspan="2" align="center">
                                                         <!-- Swiper -->
@@ -1451,8 +1235,8 @@
                                                                                         class="av"
                                                                                         style="margin:0;padding:0;">
                                                                                 </td>
-                                                                               
-                                                                                
+
+
                                                                             </tr>
                                                                             <tr>
                                                                                 <td align="center"
@@ -1491,15 +1275,17 @@
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
-                                                                                <td align="center" style="margin-top: 25px;">
-                                                                                    <button style="margin-top: 25px;"><a href="index.html">choose</a></button>   
+                                                                                <td align="center"
+                                                                                    style="margin-top: 25px;">
+                                                                                    <button style="margin-top: 25px;"><a
+                                                                                            href="stopwatch.html">choose</a></button>
                                                                                 </td>
                                                                             </tr>
-                                                                           
+
                                                                         </tbody>
                                                                     </table>
                                                                 </div>
-                                                                
+
                                                                 <div class="swiper-slide" role="group"
                                                                     aria-label="4 / 5"
                                                                     style="width: 15px; margin-right: 80px;">
@@ -1682,8 +1468,8 @@
 
                     <!-- Initialize Swiper -->
                     <script language="javascript">
-                        const swiper = new Swiper('.swiper', {
-                            slidesPerView: 4,
+                        const swiperr = new Swiper('.swiper', {
+                            slidesPerView: 2,
                             spaceBetween: 80,
                             centeredSlides: true,
                             slideToClickedSlide: true,
@@ -1708,6 +1494,343 @@
             </div>
         </div>
     </div>
+
+    <!-- Button 2-->
+     <button type="button" class="btn btn-primary judul1" data-bs-toggle="modal" data-bs-target="#exampleModal2"
+     style="margin-top: -390px;position: absolute;margin-left: 1047px;">
+     3
+    </button>
+    <!-- Modal 2-->
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: white;">Pick plane</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="">
+                    <div id="divmodal" class="modal" style="display:none;" onclick="this.style.display='none';">
+                        <div id="divmodalcontent" class="modal-content">
+                            <span class="close">×</span>
+                            <p id="modaltxt"></p>
+                        </div>
+                    </div>
+
+                    <div id="diverr" align="center"
+                        style="display:none;background-color:#D32F2F;color:#FFFFFF;margin:50px auto;width:80%;">
+                    </div>
+
+                    <form id="fapp" name="fapp" method="post" action=""> <input type="hidden" name="enviado" value="1">
+                        <input type="hidden" id="idplayer" name="idplayer" value="">
+                        <input type="hidden" id="ids" name="ids" value="">
+
+                        <input type="hidden" name="idapp" value="39">
+                        <input type="hidden" id="idav" name="idav" value="">
+                        <table class="tprinc" align="center">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <table
+                                            style="width:100%;border-radius:10px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);background-color:#F5F5F5;border:2px solid #01579B;margin-top: -30px;margin-left: 50px;margin-bottom: 30px;"
+                                            align="center">
+
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="2" style="height:10px"></td>
+                                                </tr>
+                                                <tr class="tr_av">
+                                                    <td colspan="2" style="height:10px"></td>
+                                                </tr>
+
+                                                <tr class="tr_av">
+                                                    <td colspan="2" align="center">
+                                                        <!-- Swiper -->
+                                                        <div
+                                                            class="swiper swiper-initialized swiper-horizontal swiper-pointer-events">
+                                                            <div class="swiper-wrapper"
+                                                                id="swiper-wrapper-fe378df940a2513a" aria-live="polite"
+                                                                style="transition-duration: 0ms; transform: translate3d(47.5px, 0px, 0px);">
+                                                                <div class="swiper-slide swiper-slide-prev" role="group"
+                                                                    aria-label="1 / 5"
+                                                                    style="width: 15px; margin-right: 80px;">
+                                                                    <table style="border:0;" align="center"
+                                                                        cellpadding="0" cellspacing="0">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td style="height:52px;padding:0"><img
+                                                                                        src="image/kapal.png" class="av"
+                                                                                        style="margin:0;padding:0;">
+                                                                                </td>
+
+
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td align="center"
+                                                                                    style="padding:2px 0 0 0;">Speed
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td align="center"
+                                                                                    style="white-space:nowrap;padding:0;line-height:5px;">
+                                                                                    <div align="left"
+                                                                                        style="width:50px;height:5px;background-color:#CCCCCC;">
+                                                                                        <div
+                                                                                            style="width:33px;height:5px;background-color:rgb(33, 4, 41);">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td align="center"
+                                                                                    style="padding:2px 0 0 0;">Shot</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td align="center"
+                                                                                    style="white-space:nowrap;padding:0;line-height:5px;">
+                                                                                    <div align="left"
+                                                                                        style="width:50px;height:5px;background-color:#CCCCCC;">
+                                                                                        <div
+                                                                                            style="width:5px;height:5px;background-color:rgb(33, 4, 41);">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td align="center"
+                                                                                    style="padding:2px 0 0 0;">
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td align="center"
+                                                                                    style="margin-top: 25px;">
+                                                                                    <button style="margin-top: 25px;"><a
+                                                                                            href="index.html">choose</a></button>
+                                                                                </td>
+                                                                            </tr>
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+
+                                                                <div class="swiper-slide" role="group"
+                                                                    aria-label="4 / 5"
+                                                                    style="width: 15px; margin-right: 80px;">
+                                                                    <table style="border:0;" align="center"
+                                                                        cellpadding="0" cellspacing="0">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td style="height:52px;padding:0"><img
+                                                                                        src="Img/pesawat5.png"
+                                                                                        class="av"
+                                                                                        style="margin:0;padding:0;">
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td align="center"
+                                                                                    style="padding:2px 0 0 0;">Speed
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td align="center"
+                                                                                    style="white-space:nowrap;padding:0;line-height:5px;">
+                                                                                    <div align="left"
+                                                                                        style="width:50px;height:5px;background-color:#CCCCCC;">
+                                                                                        <div
+                                                                                            style="width:23px;height:5px;background-color:green;">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td align="center"
+                                                                                    style="padding:2px 0 0 0;">Shot</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td align="center"
+                                                                                    style="white-space:nowrap;padding:0;line-height:5px;">
+                                                                                    <div align="left"
+                                                                                        style="width:50px;height:5px;background-color:#CCCCCC;">
+                                                                                        <div
+                                                                                            style="width:5px;height:5px;background-color:green;">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td align="center"
+                                                                                    style="padding:2px 0 0 0;">Shield
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td align="center"
+                                                                                    style="white-space:nowrap;padding:0;line-height:5px;">
+                                                                                    <div align="left"
+                                                                                        style="width:50px;height:5px;background-color:#CCCCCC;">
+                                                                                        <div
+                                                                                            style="width:30px;height:5px;background-color:green;">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                                <div class="swiper-slide" role="group"
+                                                                    aria-label="5 / 5"
+                                                                    style="width: 15px; margin-right: 80px;">
+                                                                    <table style="border:0;" align="center"
+                                                                        cellpadding="0" cellspacing="0">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td style="height:52px;padding:0"><img
+                                                                                        src="Img/pesawat6.png"
+                                                                                        class="av"
+                                                                                        style="margin:0;padding:0;">
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td align="center"
+                                                                                    style="padding:2px 0 0 0;">Speed
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td align="center"
+                                                                                    style="white-space:nowrap;padding:0;line-height:5px;">
+                                                                                    <div align="left"
+                                                                                        style="width:50px;height:5px;background-color:#CCCCCC;">
+                                                                                        <div
+                                                                                            style="width:20px;height:5px;background-color:green;">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td align="center"
+                                                                                    style="padding:2px 0 0 0;">Shot</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td align="center"
+                                                                                    style="white-space:nowrap;padding:0;line-height:5px;">
+                                                                                    <div align="left"
+                                                                                        style="width:50px;height:5px;background-color:#CCCCCC;">
+                                                                                        <div
+                                                                                            style="width:10px;height:5px;background-color:green;">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td align="center"
+                                                                                    style="padding:2px 0 0 0;">Shield
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td align="center"
+                                                                                    style="white-space:nowrap;padding:0;line-height:5px;">
+                                                                                    <div align="left"
+                                                                                        style="width:50px;height:5px;background-color:#CCCCCC;">
+                                                                                        <div
+                                                                                            style="width:20px;height:5px;background-color:green;">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                            <!-- Add Arrows -->
+                                                            <div class="swiper-button-prev" style="color:#F44336;"
+                                                                tabindex="0" role="button" aria-label="Previous slide"
+                                                                aria-controls="swiper-wrapper-fe378df940a2513a"
+                                                                aria-disabled="false"></div>
+                                                            <div class="swiper-button-next" style="color:#F44336;"
+                                                                tabindex="0" role="button" aria-label="Next slide"
+                                                                aria-controls="swiper-wrapper-fe378df940a2513a"
+                                                                aria-disabled="false">
+                                                            </div>
+                                                            <span class="swiper-notification" aria-live="assertive"
+                                                                aria-atomic="true"></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="height:30px"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" align="center">
+                                                        <div>
+                                                            <div class="grecaptcha-badge" data-style="bottomright"
+                                                                style="width: 256px; height: 60px; display: block; transition: right 0.3s ease 0s; position: fixed; bottom: 14px; right: -186px;">
+                                                                <div class="grecaptcha-logo"><iframe title="reCAPT"
+                                                                        width="256" height="60" role="presentation"
+                                                                        name="a-bnarexo7nzvw" frameborder="0"
+                                                                        scrolling="no"
+                                                                        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe>
+                                                                </div>
+                                                                <div class="grecaptcha-error"></div><textarea
+                                                                    id="g-recaptcha-response"
+                                                                    name="g-recaptcha-response"
+                                                                    class="g-recaptcha-response"
+                                                                    style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea>
+                                                            </div><iframe style="display: none;"></iframe>
+                                                        </div>
+                                                        <!-- <button id="btnenv" class="g-recaptcha boto_g"
+                                                            style="margin-left:26px;margin-right:10px;"
+                                                            data-sitekey="6LfIxAQaAAAAAJ-vixcHTwCaOvnhzMcQreF1XGQo"
+                                                            data-callback="onSubmit"
+                                                            data-action="submit">Access</button><img id="loader" src=""
+                                                            style="visibility:hidden;border:0;width:16px;"> -->
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- <tr><td><a class="font_literal_p" style="text-decoration:none;color:#133E85;" href="https://pixworld.io" title="Create your 2D Chat or multiplayer Game">Pixworld.io</a></td></tr> -->
+                            </tbody>
+                        </table>
+                    </form>
+
+                    <!-- Initialize Swiper -->
+                    <script language="javascript">
+                        const swiperrr = new Swiper('.swiper', {
+                            slidesPerView: 1,
+                            spaceBetween: 80,
+                            centeredSlides: true,
+                            slideToClickedSlide: true,
+                            navigation: {
+                                nextEl: '.swiper-button-next',
+                                prevEl: '.swiper-button-prev',
+                            },
+                            initialSlide: 3
+                        });
+                    </script>
+
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+                        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+                        crossorigin="anonymous">
+                    </script>
+
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="level6.html"  class="btn btn-primary"style="margin-top: -125px;position: absolute;margin-left: 257px;"> 6 </a>
+
+    <a href="level5.html"  class="btn btn-primary"style="margin-top: -125px;position: absolute;margin-left: 653px;"> 5 </a>
+
+    <a href="level4.html"  class="btn btn-primary"style="margin-top: -125px;position: absolute;margin-left: 1053px;"> 4 </a>
+ 
+ 
+
+
+
 
 </body>
 

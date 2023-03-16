@@ -96,6 +96,13 @@
         var kalah=new Audio();
         kalah.src="audio/kalah.mp3";
 
+        var tembak=new Audio();
+        tembak.src="audio/tembak.mp3";
+
+        var mledak=new Audio();
+        mledak.src="audio/mledak.mp3";
+
+
         function aksikanvas(){
 
             suara.play()
@@ -110,7 +117,9 @@
                     pesawat1.y+=6;
                 }
                 else if(event.keyCode==88){
-                    peluru.push({"x":pesawat1.x+130,"y":pesawat1.y+30,"w":16,"h":5});
+                    tembak.play()
+                    peluru.push({"x":pesawat1.x+70,"y":pesawat1.y,"w":16,"h":5});
+                   
                 }
             })
 
@@ -186,6 +195,7 @@
                         var p=peluru[j];
 
                         if(p.x>m.x && p.y+p.h>m.y && p.y<m.y+m.h){
+                            mledak.play();
                             meteor.splice(i,1);
                             peluru.splice(j,1)
                         }
@@ -199,6 +209,8 @@
                     clearInterval(interval);
                     ctx.clearRect(0,0,cW,cH);
                     ctx.drawImage(win,0,0);
+                    mledak.pause();
+                    tembak.pause();
                     menang.play();
                     suara.pause();
                 }
@@ -217,7 +229,7 @@
             var back=new Bg();
 
             function Pesawat(){
-                this.x=100, this.y=200, this.w=200,this.h=100;
+                this.x=100, this.y=200, this.w=120,this.h=60;
                 this.render=function(){
                     ctx.drawImage(pesawat,this.x,this.y);
                 }
